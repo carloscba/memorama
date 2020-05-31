@@ -20,7 +20,8 @@ describe('GridcardService', () => {
   })
 
   it('should be return a gridCard by size', () => {
-    const gridCard = service.buildGrid(2);
+    const gridCard = service.buildGrid(2, false);
+    console.log(gridCard);
     const card = {
       id: 0,
       par: 'A',
