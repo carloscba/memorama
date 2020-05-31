@@ -1,0 +1,3 @@
+<ng-container *ngFor = "let card of gridCard">
+    <app-card [card] = "card" (onSelectCard) = "onSelectCardHandler($event)"></app-card>
+</ng-container>
