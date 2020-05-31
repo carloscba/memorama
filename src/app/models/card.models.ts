@@ -1,7 +1,8 @@
 export enum CardState {
     SHOW = 'SHOW',
     HIDE = 'HIDE',
-    CHECKED = 'CHECKED'
+    CHECKED = 'CHECKED',
+    DISABLED = 'DISABLED'
 }
 
 export interface Card {

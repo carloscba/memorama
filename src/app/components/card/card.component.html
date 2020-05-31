@@ -1,1 +1,5 @@
-<button type="button" (click) = "onClick()">{{ inputCard.id }} - {{ inputCard.par }}</button>
+<button type="button" (click) = "onClick()" [disabled] = "inputCard.state === 'SHOW' || inputCard.state === 'CHECKED'">
+    <ng-container *ngIf="inputCard.state === 'SHOW' || inputCard.state === 'CHECKED'">        
+        {{ inputCard.id }} - {{ inputCard.par }} - {{ inputCard.state }}
+    </ng-container>
+</button>
