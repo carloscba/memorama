@@ -16,7 +16,7 @@ export class GameComponent implements OnInit {
   gridCard: Array<Card> = []
   constructor(private gridcardService: GridcardService) {
 
-   }
+  }
 
   ngOnInit(): void {
     this.gridCard = this.gridcardService.buildGrid(20);
@@ -35,31 +35,42 @@ export class GameComponent implements OnInit {
 
   resetTurn() {
     this.firstCardSelection = null;
+    this.gridCard = this.cardToDisabled(this.gridCard, false);
   }
 
   checkPar(firstCardSelection: Card, currentCard: Card) {
+    
+    this.gridCard = this.cardToDisabled(this.gridCard, true);
+
     if(firstCardSelection.id === currentCard.id) {
       setTimeout(()=>{
-        this.gridCard = this.cardToChecked(this.gridCard, this.firstCardSelection.id)  
-        this,this.resetTurn();
+        this.gridCard = this.cardToChecked(this.gridCard, this.firstCardSelection.id) 
+        this.resetTurn();
       }, TIME_TO_REVEAL)
     } else {
       setTimeout(()=>{
         this.gridCard = this.cardToHide(this.gridCard);
-        this,this.resetTurn();
+        this.resetTurn();
       }, TIME_TO_REVEAL)
     }
+    
   }
 
-  cardToShow(gridCard, currentCard: Card) : Array<Card> {
+  cardToDisabled(gridCard: Array<Card>, disabled: boolean) : Array<Card> {
+    return gridCard = gridCard.map( card => {
+      return { ...card, disabled }
+    })
+  }
+
+  cardToShow(gridCard: Array<Card>, currentCard: Card) : Array<Card> {
     return gridCard = gridCard.map( card => (card.id === currentCard.id && card.par === currentCard.par) ? { ...card, state: CardState.SHOW } : { ...card })
   }
 
-  cardToHide(gridCard) : Array<Card> {
+  cardToHide(gridCard: Array<Card>) : Array<Card> {
     return gridCard = gridCard.map( card => (card.state === CardState.SHOW) ? { ...card, state: CardState.HIDE } : { ...card })
   }
 
-  cardToChecked(gridCard: Array<Card>, id: number) {
+  cardToChecked(gridCard: Array<Card>, id: number): Array<Card> {
     return gridCard.map( card => (card.id === id) ? { ...card, state: CardState.CHECKED } : { ...card })
   }
 

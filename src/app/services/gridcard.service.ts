@@ -15,11 +15,13 @@ export class GridcardService {
       this.gridCard.push({
         id: i,
         par: 'A',
-        state: CardState.HIDE
+        state: CardState.HIDE,
+        disabled: false
       },{
         id: i,
         par: 'B',
-        state: CardState.HIDE        
+        state: CardState.HIDE,
+        disabled: false
       })
     }
 
