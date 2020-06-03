@@ -20,6 +20,7 @@ export class GameComponent implements OnInit {
   gridCard: Array<Card> = [];
   players: Array<Player> = [];
   currentPlayer: Player = null;
+  gameTime: number = 30;
 
   constructor(private gridcardService: GridcardService) {
 
@@ -48,7 +49,6 @@ export class GameComponent implements OnInit {
       })
     }
 
-    console.log(this.players)
 
     this.setCurrentPlayer(this.players[0]);
     this.gridCard = this.gridcardService.buildGrid(this.sizeGrid);
@@ -69,11 +69,15 @@ export class GameComponent implements OnInit {
     }
   }
 
-  resetTurn() {
+  resetTurn(getNextPlayer: boolean = true) {
     this.gameState = (this.endGame(this.gridCard)) ? GameState.END : GameState.PLAYING;
     this.firstCardSelection = null;
     this.gridCard = this.cardToDisabled(this.gridCard, false);
-    this.currentPlayer = this.getNextPlayer(this.players, this.currentPlayer);
+    this.currentPlayer = (getNextPlayer) ? this.getNextPlayer(this.players, this.currentPlayer) : this.currentPlayer;
+  }
+
+  onCompleteHandler() {
+    this.resetTurn();
   }
 
   endGame(gridCard: Array<Card>) {
@@ -101,7 +105,7 @@ export class GameComponent implements OnInit {
     setTimeout(()=>{
       this.gridCard = this.cardToChecked(this.gridCard, this.firstCardSelection.id);
       this.players = this.updateScore(this.players, this.currentPlayer);
-      this.resetTurn();
+      this.resetTurn(false);
     }, TIME_TO_REVEAL); 
   }
 
