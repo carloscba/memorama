@@ -1,17 +1,23 @@
-
 <ng-container *ngIf="gameState===gameStates.PLAYING">
     <div class="row">
         <div class="col-sm-2">
-            <app-player-box [player] = "player" [currentPlayer] = "currentPlayer"  *ngFor = "let player of players"></app-player-box>
-
-            <app-countdown [time]="gameTime" (onComplete) = "onCompleteHandler()"></app-countdown>
-        </div>        
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Memorama</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ currentPlayer.name }}</h6>
+                    <app-countdown [time]="gameTime" (onComplete)="onCompleteHandler()"></app-countdown>
+                </div>
+            </div>
+            <ul class="list-group" *ngFor="let player of players">
+                <app-player-box [player]="player" [currentPlayer]="currentPlayer" ></app-player-box>                
+            </ul>            
+        </div>
         <div class="col-sm-10">
-            <app-card [card] = "card" (onSelectCard) = "onSelectCardHandler($event)" *ngFor = "let card of gridCard"></app-card>
+            <app-card [card]="card" (onSelectCard)="onSelectCardHandler($event)" *ngFor="let card of gridCard">
+            </app-card>
         </div>
     </div>
 </ng-container>
-
 
 <ng-container *ngIf="gameState===gameStates.LOBBY">
     <div class="row">
@@ -29,7 +35,12 @@
                 <option [value]="20">20 cards</option>
                 <option [value]="40">40 cards</option>
             </select>
-            <button type="button" class="btn btn-secondary btn-block" [disabled]="(!sizeGrid)" (click) = "startGame()">Start Game</button>
+            <button type="button" class="btn btn-secondary btn-block" [disabled]="(!sizeGrid)"
+                (click)="startGame()">Start Game</button>
         </div>
     </div>
+</ng-container>
+
+<ng-container *ngIf="gameState===gameStates.END">
+    
 </ng-container>
