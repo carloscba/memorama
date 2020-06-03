@@ -12,6 +12,8 @@ const TIME_TO_REVEAL = 2000;
 export class GameComponent implements OnInit {
 
   firstCardSelection: Card = null;
+  currentPlayer: string = null;
+  sizeGrid: number = null;
 
   gridCard: Array<Card> = []
   constructor(private gridcardService: GridcardService) {
@@ -19,7 +21,14 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.gridCard = this.gridcardService.buildGrid(20);
+    
+  }
+
+  setSizeGrid(e) : void {
+    this.sizeGrid = parseInt(e.target.value)
+  }
+  startGame() : void {
+    this.gridCard = this.gridcardService.buildGrid(this.sizeGrid);
   }
 
   onSelectCardHandler(card: Card): void {

@@ -1,3 +1,12 @@
 <ng-container *ngFor = "let card of gridCard">
     <app-card [card] = "card" (onSelectCard) = "onSelectCardHandler($event)"></app-card>
 </ng-container>
+
+<select (change)="setSizeGrid($event)">
+    <option [value]="0">Size grid</option>
+    <option [value]="10">10 cards</option>
+    <option [value]="20">20 cards</option>
+    <option [value]="40">40 cards</option>
+</select>
+
+<button [disabled]="(!sizeGrid)" (click) = "startGame()">Start Game</button>
