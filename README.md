@@ -10,7 +10,7 @@ Instalar dependencias
 npm install
 ```
 
-Ejecutar el juego
+Ejecutar aplicación
 ```
 npm run install
 ```
