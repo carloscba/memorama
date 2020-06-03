@@ -4,6 +4,12 @@ export enum CardState {
     CHECKED = 'CHECKED'
 }
 
+export enum GameState {
+    LOBBY = 'LOBBY',
+    PLAYING = 'PLAYING',
+    END = 'END'
+}
+
 export interface Card {
     id: number,
     par: string,

@@ -1,11 +1,11 @@
-<ng-container *ngIf="startedGame">
+<ng-container *ngIf="gameState===gameStates.PLAYING">
     <app-card [card] = "card" (onSelectCard) = "onSelectCardHandler($event)" *ngFor = "let card of gridCard"></app-card>
 
     <app-player-box [player] = "player" [currentPlayer] = "currentPlayer"  *ngFor = "let player of players"></app-player-box>
 </ng-container>
 
 
-<ng-container *ngIf="!startedGame">
+<ng-container *ngIf="gameState===gameStates.LOBBY">
     <select (change)="setSizeGrid($event)">
         <option [value]="0">Size grid</option>
         <option [value]="10">10 cards</option>

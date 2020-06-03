@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GridcardService } from 'src/app/services/gridcard.service';
-import { Card, CardState, Player } from 'src/app/models/card.models';
+import { Card, CardState, Player, GameState } from 'src/app/models/card.models';
 
 const TIME_TO_REVEAL = 2000;
 const SCORE_STEP = 10;
@@ -14,7 +14,9 @@ export class GameComponent implements OnInit {
 
   firstCardSelection: Card = null;
   sizeGrid: number = null;
-  startedGame: boolean = false;
+  gameState: GameState = GameState.LOBBY;
+  gameStates: any = GameState;
+  
   gridCard: Array<Card> = [];
   players: Array<Player> = [];
   currentPlayer: Player = null;
@@ -32,7 +34,7 @@ export class GameComponent implements OnInit {
   }
 
   startGame() : void {
-    this.startedGame = true;
+    this.gameState = GameState.PLAYING
     this.players.push({
       id : 1,
       name: "player 1",
@@ -67,9 +69,14 @@ export class GameComponent implements OnInit {
   }
 
   resetTurn() {
+    this.gameState = (this.endGame(this.gridCard)) ? GameState.END : GameState.PLAYING;
     this.firstCardSelection = null;
     this.gridCard = this.cardToDisabled(this.gridCard, false);
     this.currentPlayer = this.getNextPlayer(this.players, this.currentPlayer);
+  }
+
+  endGame(gridCard: Array<Card>) {
+    return(gridCard.filter(card => card.state === CardState.CHECKED).length === gridCard.length)
   }
 
   getNextPlayer(players: Array<Player>, currentPlayer: Player) {
