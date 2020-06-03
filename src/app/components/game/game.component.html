@@ -43,5 +43,13 @@
 </ng-container>
 
 <ng-container *ngIf="gameState===gameStates.END">
-    
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Memorama</h5>
+            Resultados
+        </div>
+    </div>
+    <ul class="list-group" *ngFor="let player of players">
+        <app-player-box [player]="player" [currentPlayer]="currentPlayer" ></app-player-box>                
+    </ul>
 </ng-container>
