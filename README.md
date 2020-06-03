@@ -19,3 +19,9 @@ Correr tests
 ```
 npm run test
 ```
+
+Pantalla inicial
+
+Juego
+
+Pantalla final
