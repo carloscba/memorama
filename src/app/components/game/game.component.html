@@ -1,8 +1,7 @@
 <ng-container *ngIf="startedGame">
     <app-card [card] = "card" (onSelectCard) = "onSelectCardHandler($event)" *ngFor = "let card of gridCard"></app-card>
 
-    <app-player-box [name] = "'Player 1'" [score] = "0"></app-player-box>
-    <app-player-box [name] = "'Player 2'" [score] = "0"></app-player-box>
+    <app-player-box [player] = "player" [currentPlayer] = "currentPlayer"  *ngFor = "let player of players"></app-player-box>
 </ng-container>
 
 

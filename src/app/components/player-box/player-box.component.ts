@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Player } from 'src/app/models/card.models';
 
 @Component({
   selector: 'app-player-box',
@@ -7,8 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PlayerBoxComponent implements OnInit {
 
-  @Input('name') inputName: string = '';
-  @Input('score') inputScore: number = 0;
+  @Input('player') inputPlayer: Player = null;
+  @Input('currentPlayer') inputCurrentPlayer: Player = null;
 
   constructor() { }
 

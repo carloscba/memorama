@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GridcardService } from 'src/app/services/gridcard.service';
-import { Card, CardState } from 'src/app/models/card.models';
+import { Card, CardState, Player } from 'src/app/models/card.models';
 
 const TIME_TO_REVEAL = 2000;
 
@@ -12,11 +12,12 @@ const TIME_TO_REVEAL = 2000;
 export class GameComponent implements OnInit {
 
   firstCardSelection: Card = null;
-  currentPlayer: string = null;
   sizeGrid: number = null;
   startedGame: boolean = false;
+  gridCard: Array<Card> = [];
+  players: Array<Player> = [];
+  currentPlayer: Player = null;
 
-  gridCard: Array<Card> = []
   constructor(private gridcardService: GridcardService) {
 
   }
@@ -28,9 +29,29 @@ export class GameComponent implements OnInit {
   setSizeGrid(e) : void {
     this.sizeGrid = parseInt(e.target.value)
   }
+
   startGame() : void {
     this.startedGame = true;
+    this.players.push({
+      id : 1,
+      name: "player 1",
+      score: 0
+    },{
+      id : 2,
+      name: "player 2",
+      score: 0
+    },{
+      id : 3,
+      name: "player 3",
+      score: 0
+    })
+
+    this.setCurrentPlayer(this.players[0]);
     this.gridCard = this.gridcardService.buildGrid(this.sizeGrid);
+  }
+
+  setCurrentPlayer(player: Player) {
+    this.currentPlayer = player;
   }
 
   onSelectCardHandler(card: Card): void {

@@ -10,3 +10,9 @@ export interface Card {
     state: CardState,
     disabled: boolean
 }
+
+export interface Player {
+    id: number,
+    name: string,
+    score: number
+}

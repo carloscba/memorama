@@ -1,4 +1,7 @@
 <div>
-    <h3>{{ inputName }}</h3>
-    <p>{{ inputScore }}</p>
+    <h3>{{ inputPlayer?.name }}</h3>
+    <p>{{ inputPlayer?.score }}</p>
+    <ng-container *ngIf="(inputPlayer.id === inputCurrentPlayer.id)">
+        Jugando
+    </ng-container>
 </div>
