@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GridcardService } from 'src/app/services/gridcard.service';
 import { Card, CardState, Player, GameState } from 'src/app/models/card.models';
 
-const TIME_TO_REVEAL = 2000;
+const TIME_TO_REVEAL = 1000;
 const SCORE_STEP = 10;
 const GAME_TIME = 10;
 
