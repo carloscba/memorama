@@ -16,7 +16,7 @@ export class GameComponent implements OnInit {
   sizeGrid: number = null;
   gameState: GameState = GameState.LOBBY;
   gameStates: any = GameState;
-  
+  numberOfPLayers: number = 2;
   gridCard: Array<Card> = [];
   players: Array<Player> = [];
   currentPlayer: Player = null;
@@ -33,21 +33,22 @@ export class GameComponent implements OnInit {
     this.sizeGrid = parseInt(e.target.value)
   }
 
+  setNumberOfPLayers(e): void {
+    this.numberOfPLayers = parseInt(e.target.value)
+  }
+
   startGame() : void {
     this.gameState = GameState.PLAYING
-    this.players.push({
-      id : 1,
-      name: "player 1",
-      score: 0
-    },{
-      id : 2,
-      name: "player 2",
-      score: 0
-    },{
-      id : 3,
-      name: "player 3",
-      score: 0
-    })
+    
+    for(let n=0; n < this.numberOfPLayers; n++){
+      this.players.push({
+        id : Date.now()+Math.floor(Math.random() * 1000),
+        name: `Player ${n+1}`,
+        score: 0
+      })
+    }
+
+    console.log(this.players)
 
     this.setCurrentPlayer(this.players[0]);
     this.gridCard = this.gridcardService.buildGrid(this.sizeGrid);

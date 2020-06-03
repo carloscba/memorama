@@ -1,7 +1,9 @@
-<div>
-    <h3>{{ inputPlayer?.name }}</h3>
-    <p>{{ inputPlayer?.score }}</p>
-    <ng-container *ngIf="(inputPlayer.id === inputCurrentPlayer.id)">
-        Jugando
-    </ng-container>
+<div class="row">
+    <div class="col-sm">
+        <h2 >{{ inputPlayer?.name }}</h2>
+        <p>Score: {{ inputPlayer?.score }}</p>
+        <ng-container *ngIf="(inputPlayer.id === inputCurrentPlayer.id)">
+            Jugando
+        </ng-container>
+    </div>
 </div>
