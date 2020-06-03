@@ -53,7 +53,7 @@ export class GameComponent implements OnInit {
 
 
     this.setCurrentPlayer(this.players[0]);
-    this.gridCard = this.gridcardService.buildGrid(this.sizeGrid, false);
+    this.gridCard = this.gridcardService.buildGrid(this.sizeGrid);
   }
 
   setCurrentPlayer(player: Player) {
