@@ -21,11 +21,11 @@ describe('GridcardService', () => {
 
   it('should be return a gridCard by size', () => {
     const gridCard = service.buildGrid(2, false);
-    console.log(gridCard);
     const card = {
       id: 0,
       par: 'A',
-      state: CardState.HIDE      
+      state: CardState.HIDE,
+      disabled: false
     }
     expect(gridCard[0]).toEqual(card);
   })  
