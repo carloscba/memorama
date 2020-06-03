@@ -4,6 +4,7 @@ import { Card, CardState, Player, GameState } from 'src/app/models/card.models';
 
 const TIME_TO_REVEAL = 2000;
 const SCORE_STEP = 10;
+const GAME_TIME = 10;
 
 @Component({
   selector: 'app-game',
@@ -20,7 +21,8 @@ export class GameComponent implements OnInit {
   gridCard: Array<Card> = [];
   players: Array<Player> = [];
   currentPlayer: Player = null;
-  gameTime: number = 30;
+  gameTime: number = GAME_TIME;
+  gameTimeKey: number = 0;
 
   constructor(private gridcardService: GridcardService) {
 
@@ -70,6 +72,7 @@ export class GameComponent implements OnInit {
   }
 
   resetTurn(getNextPlayer: boolean = true) {
+    this.gameTimeKey = Date.now();
     this.gameState = (this.endGame(this.gridCard)) ? GameState.END : GameState.PLAYING;
     this.firstCardSelection = null;
     this.gridCard = this.cardToDisabled(this.gridCard, false);
@@ -90,15 +93,13 @@ export class GameComponent implements OnInit {
   }
 
   checkPar(firstCardSelection: Card, currentCard: Card) {
-    
     this.gridCard = this.cardToDisabled(this.gridCard, true);
 
     if(firstCardSelection.id === currentCard.id) {
       this.successsPar();
     } else {
       this.errorPar();
-    }
-    
+    } 
   }
 
   successsPar() :void {

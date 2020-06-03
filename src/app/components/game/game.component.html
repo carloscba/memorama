@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Memorama</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ currentPlayer.name }}</h6>
-                    <app-countdown [time]="gameTime" (onComplete)="onCompleteHandler()"></app-countdown>
+                    <app-countdown [time]="gameTime" [key]="gameTimeKey" (onComplete)="onCompleteHandler()"></app-countdown>
                 </div>
             </div>
             <ul class="list-group" *ngFor="let player of players">
