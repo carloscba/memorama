@@ -68,6 +68,13 @@ export class GameComponent implements OnInit {
   resetTurn() {
     this.firstCardSelection = null;
     this.gridCard = this.cardToDisabled(this.gridCard, false);
+    this.currentPlayer = this.getNextPlayer(this.players, this.currentPlayer);
+    console.log(this.currentPlayer);
+  }
+
+  getNextPlayer(players: Array<Player>, currentPlayer: Player) {
+    let currentIndex = players.findIndex(player => player.id === currentPlayer.id);
+    return (currentIndex === players.length-1) ? players[0] : players[currentIndex+1];
   }
 
   checkPar(firstCardSelection: Card, currentCard: Card) {
