@@ -14,6 +14,7 @@ export class GameComponent implements OnInit {
   firstCardSelection: Card = null;
   currentPlayer: string = null;
   sizeGrid: number = null;
+  startedGame: boolean = false;
 
   gridCard: Array<Card> = []
   constructor(private gridcardService: GridcardService) {
@@ -28,6 +29,7 @@ export class GameComponent implements OnInit {
     this.sizeGrid = parseInt(e.target.value)
   }
   startGame() : void {
+    this.startedGame = true;
     this.gridCard = this.gridcardService.buildGrid(this.sizeGrid);
   }
 

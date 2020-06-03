@@ -1,12 +1,18 @@
-<ng-container *ngFor = "let card of gridCard">
-    <app-card [card] = "card" (onSelectCard) = "onSelectCardHandler($event)"></app-card>
+<ng-container *ngIf="startedGame">
+    <app-card [card] = "card" (onSelectCard) = "onSelectCardHandler($event)" *ngFor = "let card of gridCard"></app-card>
+
+    <app-player-box [name] = "'Player 1'" [score] = "0"></app-player-box>
+    <app-player-box [name] = "'Player 2'" [score] = "0"></app-player-box>
 </ng-container>
 
-<select (change)="setSizeGrid($event)">
-    <option [value]="0">Size grid</option>
-    <option [value]="10">10 cards</option>
-    <option [value]="20">20 cards</option>
-    <option [value]="40">40 cards</option>
-</select>
 
-<button [disabled]="(!sizeGrid)" (click) = "startGame()">Start Game</button>
+<ng-container *ngIf="!startedGame">
+    <select (change)="setSizeGrid($event)">
+        <option [value]="0">Size grid</option>
+        <option [value]="10">10 cards</option>
+        <option [value]="20">20 cards</option>
+        <option [value]="40">40 cards</option>
+    </select>
+
+    <button [disabled]="(!sizeGrid)" (click) = "startGame()">Start Game</button>
+</ng-container>
