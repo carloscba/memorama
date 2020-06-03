@@ -48,4 +48,17 @@ describe('GameComponent', () => {
     const nextPlayer = component.getNextPlayer(players, currentPlayer)
     expect(nextPlayer.id).toEqual(1);
   });    
+
+  it('should update score', () => {
+    const players = [
+      {id: 1, name: 'player 1', score: 0},
+      {id: 2, name: 'player 2', score: 0},
+      {id: 3, name: 'player 3', score: 0}
+    ]
+
+    const currentPlayer = {id: 1, name: 'player 3', score: 0};
+    
+    let newPlayers = component.updateScore(players, currentPlayer);
+    expect(newPlayers[0].score).toEqual(10);
+  })
 });

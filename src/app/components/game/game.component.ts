@@ -3,6 +3,7 @@ import { GridcardService } from 'src/app/services/gridcard.service';
 import { Card, CardState, Player } from 'src/app/models/card.models';
 
 const TIME_TO_REVEAL = 2000;
+const SCORE_STEP = 10;
 
 @Component({
   selector: 'app-game',
@@ -69,7 +70,6 @@ export class GameComponent implements OnInit {
     this.firstCardSelection = null;
     this.gridCard = this.cardToDisabled(this.gridCard, false);
     this.currentPlayer = this.getNextPlayer(this.players, this.currentPlayer);
-    console.log(this.currentPlayer);
   }
 
   getNextPlayer(players: Array<Player>, currentPlayer: Player) {
@@ -82,18 +82,32 @@ export class GameComponent implements OnInit {
     this.gridCard = this.cardToDisabled(this.gridCard, true);
 
     if(firstCardSelection.id === currentCard.id) {
-      setTimeout(()=>{
-        this.gridCard = this.cardToChecked(this.gridCard, this.firstCardSelection.id) 
-        this.resetTurn();
-      }, TIME_TO_REVEAL)
+      this.successsPar();
     } else {
-      setTimeout(()=>{
-        this.gridCard = this.cardToHide(this.gridCard);
-        this.resetTurn();
-      }, TIME_TO_REVEAL)
+      this.errorPar();
     }
     
   }
+
+  successsPar() :void {
+    setTimeout(()=>{
+      this.gridCard = this.cardToChecked(this.gridCard, this.firstCardSelection.id);
+      this.players = this.updateScore(this.players, this.currentPlayer);
+      this.resetTurn();
+    }, TIME_TO_REVEAL); 
+  }
+
+  errorPar() :void {
+    setTimeout(()=>{
+      this.gridCard = this.cardToHide(this.gridCard);
+      this.resetTurn();
+    }, TIME_TO_REVEAL)
+  }
+
+  updateScore(players: Array<Player>, currentPlayer: Player) : Array<Player> {
+    return players.map( player => (player.id === currentPlayer.id) ? { ...player, score: (player.score + SCORE_STEP)} : { ...player });
+  }
+
 
   cardToDisabled(gridCard: Array<Card>, disabled: boolean) : Array<Card> {
     return gridCard = gridCard.map( card => {
