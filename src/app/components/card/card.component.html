@@ -1,7 +1,9 @@
-<button type="button" (click) = "onClick()" [disabled] = "inputCard.disabled">
-    <ng-container *ngIf="inputCard.state === 'SHOW' || inputCard.state === 'CHECKED'">        
-        {{ inputCard.id }} - {{ inputCard.par }} - {{ inputCard.state }}
+<button type="button" (click)="onClick()" [disabled]="inputCard.disabled">
+    <ng-container *ngIf="inputCard.state === 'SHOW' || inputCard.state === 'CHECKED'">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ inputCard.id }} - {{ inputCard.par }}</h5>
+            </div>
+        </div>
     </ng-container>
-    {{ inputCard | json}}
 </button>
-

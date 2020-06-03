@@ -124,7 +124,8 @@ export class GameComponent implements OnInit {
 
   cardToDisabled(gridCard: Array<Card>, disabled: boolean) : Array<Card> {
     return gridCard = gridCard.map( card => {
-      return { ...card, disabled }
+      let autoDisabled = (card.state === CardState.CHECKED) ? true : disabled
+      return { ...card,  disabled: autoDisabled }
     })
   }
 
@@ -137,7 +138,7 @@ export class GameComponent implements OnInit {
   }
 
   cardToChecked(gridCard: Array<Card>, id: number): Array<Card> {
-    return gridCard.map( card => (card.id === id) ? { ...card, state: CardState.CHECKED } : { ...card })
+    return gridCard.map( card => (card.id === id) ? { ...card, disabled: true, state: CardState.CHECKED } : { ...card })
   }
 
 }
